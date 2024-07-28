@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "293871765328",
+    "project_id": "flutter-task-auro",
+    "storage_bucket": "flutter-task-auro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293871765328:android:6a57f092f625f3ef350e55",
+        "android_client_info": {
+          "package_name": "com.auro.flutter_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7HwkMZa7w1-R3IcMb72LgxxQppahlvQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
