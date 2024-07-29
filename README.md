@@ -1,14 +1,7 @@
 # flutter_task ( Flutter Assignment )
 
-Gateway to Ayna AI
 
 ## More Details
-
-This a Flutter Web Application I have developed recently to deal with web sockets & local noSQL DBs like Hive.
-
-
-- [ Application Link ( deployed on Firebase )](https://ayna-assignment-auro.web.app/)
-- [ Backup Link ( Github Pages )](https://auro-dev.github.io/)
 
 
 ## Key Points
