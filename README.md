@@ -1,11 +1,9 @@
 # flutter_task ( Flutter Assignment )
 
 
-## Key Things >
+## Key Things 
 ### Flutter + Firebase + Provider
 
-</br>
-</br>
 ## Key Points
 - The application uses Provider for managing states and separates business logic from the Presentation layer.
 - For Routing I have used go_router package ( although I'm a fan of GetX ), but for now just went with the recommended router package.
