@@ -1,8 +1,10 @@
 # flutter_task ( Flutter Assignment )
 
 
-## Key Things 
-### Flutter + Firebase + Provider
+## Combo : ( Flutter + Firebase + Provider )
+</br>
+
+
 
 ## Key Points
 - The application uses Provider for managing states and separates business logic from the Presentation layer.
