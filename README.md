@@ -1,4 +1,4 @@
-# flutter_task ( Flutter Web Assignment )
+# flutter_task ( Flutter Assignment )
 
 Gateway to Ayna AI
 
@@ -18,11 +18,15 @@ This a Flutter Web Application I have developed recently to deal with web socket
 
 
 
-https://github.com/user-attachments/assets/a2829984-6857-435c-813b-0deeef8b6e8a
+
+
+https://github.com/user-attachments/assets/b86f5969-2ef7-468d-a33b-a5e9127e0b80
 
 
 
 
+
+#Firebase Remote Config Demonstration :
 </br>
 </br>
 
@@ -31,17 +35,14 @@ Firebase Remote Config Demonstration :
 <video src="https://github.com/user-attachments/assets/a2829984-6857-435c-813b-0deeef8b6e8a"></video>
 
 </br>
+</br>
 
-Chat With Web Socket Echo Server:
+#Full Demonstration :
 
-<video src="https://github.com/anon-000/ayna-task/assets/52295426/ea15106f-0ad7-4ba6-bc39-bdb5353fbbec"></video>
+<video src="https://github.com/user-attachments/assets/b86f5969-2ef7-468d-a33b-a5e9127e0b80"></video>
 
 </br>
 </br>
-
-Responsiveness :
-
-<video src="https://github.com/anon-000/ayna-task/assets/52295426/c7bc41b9-a420-436c-affb-9b5500290ffe"></video>
 
 </br>
 </br>
