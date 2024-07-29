@@ -26,23 +26,21 @@ https://github.com/user-attachments/assets/b86f5969-2ef7-468d-a33b-a5e9127e0b80
 
 
 
-#Firebase Remote Config Demonstration :
+
 </br>
 </br>
 
+</br>
+</br>
 Firebase Remote Config Demonstration :
 
+</br>
 <video src="https://github.com/user-attachments/assets/a2829984-6857-435c-813b-0deeef8b6e8a"></video>
 
 </br>
 </br>
 
-#Full Demonstration :
 
-<video src="https://github.com/user-attachments/assets/b86f5969-2ef7-468d-a33b-a5e9127e0b80"></video>
-
-</br>
-</br>
 
 </br>
 </br>
