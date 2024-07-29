@@ -4,6 +4,6 @@
 library;
 
 mixin Environment {
-  static const webSocketURL = 'wss://echo.websocket.org/';
-  static const fontFamily = 'Roboto';
+  static const demoProductsURL = 'https://dummyjson.com';
+  static const fontFamily = 'Poppins';
 }

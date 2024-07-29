@@ -1,14 +1,16 @@
-import 'package:flutter_task/api_services/db_services.dart';
-import 'package:flutter_task/blocs/auth_bloc/auth_bloc.dart';
-import 'package:flutter_task/blocs/chats_bloc/chat_bloc.dart';
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_task/config/app_colors.dart';
 import 'package:flutter_task/config/app_page_routes.dart';
+import 'package:flutter_task/providers/auth_provider.dart';
+import 'package:flutter_task/providers/product_provider.dart';
+import 'package:flutter_task/services/remote_config_service.dart';
 import 'package:flutter_task/utils/shared_preference_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:toastification/toastification.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
@@ -16,16 +18,32 @@ void main() async {
   usePathUrlStrategy();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  await DbServices.initBoxes();
   SharedPreferenceHelper.preferences = await SharedPreferences.getInstance();
+
+  // Check if the Firebase app is already initialized
+  if (Firebase.apps.isNotEmpty) {
+    // If the app is already initialized, use the existing instance
+    FirebaseApp app = Firebase.apps.first;
+  } else {
+    // If the app is not initialized, initialize it
+    await Firebase.initializeApp();
+  }
+  final remoteConfigService = RemoteConfigService();
+  try {
+    await remoteConfigService.initialize();
+  } catch (e) {
+    log(" remoteConfigService >>$e");
+  }
+
   runApp(
-    const MyApp(),
+    MyApp(remoteConfigService: remoteConfigService),
   );
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final RemoteConfigService remoteConfigService;
+
+  const MyApp({Key? key, required this.remoteConfigService}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -37,33 +55,48 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    // DbServices.initBoxes();
   }
 
   @override
   void dispose() {
-    ChatsBloc().close();
-    AuthBloc().close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: MultiBlocProvider(
+      child: MultiProvider(
         providers: [
-          BlocProvider<ChatsBloc>(create: (context) => ChatsBloc()),
-          BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(
+            create: (context) => ProductProvider(
+              widget.remoteConfigService,
+            ),
+          ),
         ],
         child: MaterialApp.router(
-          title: 'Ayna Task',
+          title: 'E-Shop',
+          themeMode: ThemeMode.light,
           theme: ThemeData(
+            fontFamily: "Poppins",
+            primaryColor: AppColors.primaryColor,
             colorScheme: ColorScheme.fromSeed(
               seedColor: AppColors.primaryColor,
             ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.primaryColor,
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+              actionsIconTheme: IconThemeData(
+                color: Colors.white,
+              ),
+            ),
             useMaterial3: true,
             canvasColor: Colors.white,
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: AppColors.scaffoldBGColor,
           ),
           routerConfig: AppPages.router,
           // routerDelegate: AppPages.router.routerDelegate,

@@ -16,7 +16,13 @@ Future<bool?> showAppAlertDialog({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(title),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         content: description != null ? Text(description) : null,
         actions: [
           TextButton(

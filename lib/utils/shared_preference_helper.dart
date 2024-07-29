@@ -1,4 +1,4 @@
-import 'package:flutter_task/data_models/user.dart';
+import 'package:flutter_task/data_models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///
@@ -19,7 +19,7 @@ class SharedPreferenceHelper {
     }
   }
 
-  static void storeUser(User? user) {
+  static void storeUser(UserDatum? user) {
     if (user != null) {
       preferences?.setString(USER_KEY, userToJson(user));
     } else {
@@ -27,7 +27,7 @@ class SharedPreferenceHelper {
     }
   }
 
-  static User? get user => preferences?.getString(USER_KEY) == null
+  static UserDatum? get user => preferences?.getString(USER_KEY) == null
       ? null
       : userFromJson(preferences?.getString(USER_KEY) ?? '');
 

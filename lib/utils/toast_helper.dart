@@ -11,6 +11,7 @@ class AppToastHelper {
       title: Text(msg),
       autoCloseDuration: const Duration(seconds: 3),
       type: type ?? ToastificationType.info,
+      alignment: Alignment.bottomCenter,
     );
   }
 }

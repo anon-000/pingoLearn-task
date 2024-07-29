@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter_task/pages/auth/login_page.dart';
-import 'package:flutter_task/pages/chats/chats_page.dart';
 import 'package:flutter_task/utils/auth_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

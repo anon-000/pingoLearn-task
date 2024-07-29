@@ -1,35 +1,96 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_task/data_models/user_model.dart';
-import 'package:provider/provider.dart';
-import 'auth_service.dart';
+import 'package:flutter_task/services/auth_service.dart';
+import 'package:flutter_task/utils/shared_preference_helper.dart';
+import 'package:flutter_task/widgets/buttons/app_primary_button.dart';
 
 ///
-/// Created by Auro on 28/07/24
+/// Created by Auro on 29/07/24
 ///
 
-class AppState with ChangeNotifier {
+class AuthProvider with ChangeNotifier {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<AppPrimaryButtonState> buttonKey =
+      GlobalKey<AppPrimaryButtonState>();
+  late AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+  String name = '', email = '', password = '';
+  int authType = 0;
+  bool isObscure = true;
+
   final AuthService _authService = AuthService();
-  User? _user;
+  UserDatum? _user;
 
-  User? get user => _user;
+  UserDatum? get user => _user;
 
-  Future<void> login(String email, String password) async {
-    final User user =
-        await _authService.signInWithEmailAndPassword(email, password);
-    _user = user;
-    notifyListeners();
+  Future<bool> signUp() async {
+    try {
+      log("INSIDE SIGN UP : $name $email $password");
+      buttonKey.currentState!.showLoader();
+      notifyListeners();
+      _user = await _authService.signUp(name, email, password);
+      SharedPreferenceHelper.storeUser(_user);
+      buttonKey.currentState!.hideLoader();
+      notifyListeners();
+      return _user != null;
+    } catch (err) {
+      buttonKey.currentState!.hideLoader();
+      notifyListeners();
+      rethrow;
+    }
   }
 
-  Future<void> signUp(String name, String email, String password) async {
-    final User user =
-        await _authService.signUpWithEmailAndPassword(name, email, password);
-    _user = user;
-    notifyListeners();
+  Future<bool> signIn() async {
+    try {
+      log("INSIDE LOGIN : $email $password");
+      buttonKey.currentState!.showLoader();
+      notifyListeners();
+      _user = await _authService.signIn(email, password);
+      SharedPreferenceHelper.storeUser(_user);
+      buttonKey.currentState!.hideLoader();
+      notifyListeners();
+      return _user != null;
+    } catch (err) {
+      buttonKey.currentState!.hideLoader();
+      notifyListeners();
+      rethrow;
+    }
   }
 
-  Future<void> logout() async {
+  Future<void> signOut() async {
     await _authService.signOut();
     _user = null;
+    notifyListeners();
+  }
+
+  handleAutoValidate(AutovalidateMode c) {
+    autoValidateMode = c;
+    notifyListeners();
+  }
+
+  changeAuthType(int value) {
+    authType = value;
+    notifyListeners();
+  }
+
+  toggleObscure() {
+    isObscure = !isObscure;
+    notifyListeners();
+  }
+
+  onNameChanged(String v) {
+    name = v;
+    notifyListeners();
+  }
+
+  onEmailChanged(String v) {
+    email = v;
+    notifyListeners();
+  }
+
+  onPasswordChanged(String v) {
+    password = v;
     notifyListeners();
   }
 }

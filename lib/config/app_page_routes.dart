@@ -1,5 +1,5 @@
 import 'package:flutter_task/pages/auth/login_page.dart';
-import 'package:flutter_task/pages/chats/chats_page.dart';
+import 'package:flutter_task/pages/home/home.dart';
 import 'package:flutter_task/pages/splash_screen/splash_screen_page.dart';
 import 'package:flutter_task/utils/auth_helper.dart';
 import 'package:go_router/go_router.dart';
@@ -12,9 +12,9 @@ class AppPages {
   static final router = GoRouter(
     routes: [
       GoRoute(
-        name: ChatsPage.routeName,
-        path: ChatsPage.routeName,
-        builder: (context, state) => const ChatsPage(),
+        name: HomePage.routeName,
+        path: HomePage.routeName,
+        builder: (context, state) => const HomePage(),
         redirect: (context, state) {
           if (AuthHelper.isLoggedIn) {
             return null;
@@ -29,7 +29,7 @@ class AppPages {
         builder: (context, state) => const SplashScreen(),
         redirect: (context, state) {
           if (AuthHelper.isLoggedIn) {
-            return ChatsPage.routeName;
+            return HomePage.routeName;
           } else {
             return LoginPage.routeName;
           }
